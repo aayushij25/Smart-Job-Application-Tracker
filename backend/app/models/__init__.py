@@ -1,0 +1,1 @@
+# defines the DB tables
