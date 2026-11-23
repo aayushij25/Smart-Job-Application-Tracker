@@ -1,0 +1,182 @@
+:root { 
+  font-family: system-ui, sans-serif; 
+  color: #1f2430; 
+  background: #f4f5f8; 
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+body { 
+  margin: 0; 
+}
+
+.center { 
+  text-align: center; 
+  margin-top: 4rem; 
+}
+
+.auth-wrap { 
+  min-height: 100vh; 
+  display: grid; 
+  place-items: center; 
+}
+
+.auth-card { 
+  background: #fff; 
+  padding: 2rem; 
+  border-radius: 12px; 
+  width: 360px; 
+  display: grid; 
+  gap: 0.9rem; 
+  box-shadow: 0 2px 12px rgba(0,0,0,.08); 
+}
+
+.auth-card h1 { 
+  margin: 0; 
+  font-size: 1.5rem; 
+}
+
+.auth-card input { 
+  padding: .6rem .7rem; 
+  border: 1px solid #cfd3dc; 
+  border-radius: 8px; 
+  font-size: 1rem; 
+}
+
+button { 
+  cursor: pointer; 
+  padding: .55rem .9rem; 
+  border-radius: 8px; 
+  border: 1px solid #cfd3dc; 
+  background: #fff; 
+  font-size: .95rem; 
+}
+
+button.primary { 
+  background: #3b5bdb; 
+  color: #fff; 
+  border-color: #3b5bdb; 
+}
+
+button:disabled { 
+  opacity: .6; 
+  cursor: not-allowed; 
+}
+
+.link-btn { 
+  border: none; 
+  background: none; 
+  color: #3b5bdb; 
+  padding: 0; 
+}
+
+.error { 
+  background: #ffe3e3; 
+  color: #a61e1e; 
+  padding: .6rem .8rem; 
+  border-radius: 8px; 
+  margin-bottom: .8rem; 
+}
+
+.page { 
+  padding: 1rem 1.5rem; 
+}
+
+.topbar { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 1rem; 
+}
+
+.topbar h1 { 
+  margin: 0; 
+  font-size: 1.4rem; 
+}
+
+.topbar > div { 
+  display: flex; 
+  gap: .8rem; 
+  align-items: center; 
+}
+
+.board { 
+  display: grid; 
+  grid-template-columns: 
+  repeat(5, minmax(220px, 1fr)); 
+  gap: 1rem; 
+  overflow-x: auto; 
+  align-items: start; 
+}
+
+.column { 
+  background: #e9ebf1; 
+  border-radius: 12px; 
+  padding: .7rem; 
+}
+
+.column-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: .6rem; 
+}
+
+.column-header h2 { 
+  font-size: 1rem; 
+  margin: 0; 
+}
+
+.count { 
+  background: #fff; 
+  border-radius: 999px; 
+  padding: 0 .55rem; 
+  font-size: .85rem; 
+}
+
+.column-body { 
+  display: grid; 
+  gap: .6rem; 
+  min-height: 60px; 
+}
+
+.card { 
+  background: #fff; 
+  border-radius: 10px; 
+  padding: .7rem .8rem; 
+  box-shadow: 0 1px 3px rgba(0,0,0,.08); 
+}
+
+.card h3 { 
+  margin: 0; 
+  font-size: 1rem; 
+}
+
+.card .role { 
+  margin: .15rem 0 .5rem; 
+  color: #555b6b; 
+  font-size: .9rem; 
+}
+
+.card-meta { 
+  display: flex; 
+  justify-content: space-between; 
+  font-size: .8rem; 
+  color: #6b7183; 
+}
+
+.badge { 
+  background: #e7f5ff; 
+  color: #1864ab; 
+  border-radius: 999px; 
+  padding: 0 .5rem; 
+}
+
+.empty { 
+  color: #8b90a0; 
+  font-size: .85rem; 
+  text-align: center; 
+  margin: .5rem 0; 
+}
