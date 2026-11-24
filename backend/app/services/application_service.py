@@ -20,6 +20,8 @@ class InvalidStatusTransition(Exception):
         super().__init__(f"Cannot move from '{current.value}' to '{target.value}'")
 
 def create_application(db: Session, user_id: int, data: dict):
+    if data.get("applied_date") is not None:
+        data = {**data, "status": S.APPLIED.value}
     return repo.create(db, user_id, data)
 
 def get_application(db: Session, user_id: int, application_id: int):
@@ -33,6 +35,8 @@ def list_applications(db: Session, user_id: int, status: S | None, limit: int, o
 
 def update_application(db: Session, user_id: int, application_id: int, changes: dict):
     application = get_application(db, user_id, application_id)
+    if changes.get("applied_date") is not None and application.status == S.SAVED.value:
+        changes = {**changes, "status": S.APPLIED.value}
     return repo.update(db, application, changes)
 
 def change_status(db: Session, user_id: int, application_id: int, new_status: S):
