@@ -1,3 +1,5 @@
+import MatchBadge from "./MatchBadge";
+
 export default function ApplicationCard({application}) {
     const {company, role, applied_date, match_score} = application;
     return (
@@ -7,7 +9,7 @@ export default function ApplicationCard({application}) {
             <div className="card-meta">
                 <span>{applied_date ? `Applied ${applied_date}`: "Not applied yet"}</span>
                 {match_score !== null && (
-                    <span className="badge">{Math.round(match_score * 100)}% match</span>
+                    <span className="badge"><MatchBadge score={match_score} /></span>
                 )}
             </div>
         </article>

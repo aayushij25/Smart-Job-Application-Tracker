@@ -71,6 +71,12 @@ export function useApplications() {
     }
   }, []);
 
+  const analyzeApplication = useCallback(async (id) => {
+    const updated = await api.analyzeApplication(id);
+    setApplications((cur) => replaceById(cur, updated));
+    return updated;
+  }, []);
+
   return {
         applications, 
         loading, 
@@ -79,6 +85,7 @@ export function useApplications() {
         addApplication,
         editApplication,
         removeApplication,
-        moveApplication
+        moveApplication,
+        analyzeApplication
     };
 }

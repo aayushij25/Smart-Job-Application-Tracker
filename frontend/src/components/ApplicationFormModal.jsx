@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AnalysisPanel from "./AnalysisPanel";
 
 const EMPTY = {
     company: "",
@@ -29,12 +30,17 @@ function toPayload(form) {
     };
 }
 
-export default function ApplicationFormModal({ application, onSubmit, onDelete, onClose}) {
+export default function ApplicationFormModal({ application, onSubmit, onDelete, onAnalyze, onClose}) {
     const isEdit = Boolean(application);
     const [form, setForm] = useState(() => toForm(application));
     const [error, setError] = useState("");
     const [busy, setBusy] = useState(false);
     const [confirmingDelete, setConfirmingDelete] = useState(false);
+    const [current, setCurrent] = useState(application);
+    const [analyzing, setAnalyzing] = useState(false);
+
+    const savedDescription = (application?.job_description ?? "").trim();
+    const canAnalyze = isEdit && form.job_description.trim() !== ""&& form.job_description.trim() === savedDescription;
 
     useEffect(() => {
         const onKey = (e) => {
@@ -61,6 +67,18 @@ export default function ApplicationFormModal({ application, onSubmit, onDelete, 
     const handleSubmit = (e) => {
         e.preventDefault();
         run(() => onSubmit(toPayload(form)));
+    };
+
+    const handleAnalyze = async() => {
+        setError("");
+        setAnalyzing(true);
+        try {
+            setCurrent(await onAnalyze(application.id));
+        } catch(err) {
+            setError(err.message);
+        } finally {
+            setAnalyzing(false);
+        }
     };
 
     return (
@@ -94,6 +112,14 @@ export default function ApplicationFormModal({ application, onSubmit, onDelete, 
                     <textarea rows={3} value={form.notes} onChange={setField("notes")} />
                 </label>
 
+                {isEdit && (
+                    <AnalysisPanel 
+                        application={current}
+                        canAnalyze={canAnalyze}
+                        busy={analyzing}
+                        onAnalyze={handleAnalyze}
+                    />
+                )}
                 {confirmingDelete ? (
                     <div className="modal-actions">
                         <span>Delete this application?</span>

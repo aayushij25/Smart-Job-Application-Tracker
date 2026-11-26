@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import ApplicationFormModal from "../components/ApplicationFormModal";
 import KanbanBoard from "../components/KanbanBoard";
+import ResumeModal from "../components/ResumeModal";
 import { COLUMNS } from "../constants";
 import { useApplications } from "../hooks/useApplications";
 import { useAuth } from "../hooks/useAuth";
+
 
 export default function BoardPage() {
     const {user, logout} = useAuth();
@@ -16,11 +18,13 @@ export default function BoardPage() {
         editApplication,
         removeApplication,
         moveApplication,
+        analyzeApplication,
     } = useApplications();
     console.log(applications.map((a) => [a.id, a.status]));
 
     const [modal, setModal] = useState(null); //null = closed, {} = create, {application} = edit
     const [toast, setToast] = useState("");
+    const [showResume, setShowResume] = useState(false);
 
     useEffect(() => {
         if (!toast) return;
@@ -62,6 +66,8 @@ export default function BoardPage() {
                     <button className="primary" onClick={() => setModal({})}>
                         + Add application
                     </button>
+                    <button onClick={() => setShowResume(true)}>Resume</button>
+                    {showResume && <ResumeModal onClose={() => setShowResume(false)} />}
                     <span>{user.email}</span>
                     <button onClick={logout}>Log out</button>
                 </div>
@@ -89,6 +95,7 @@ export default function BoardPage() {
                     onSubmit={handleSave}
                     onDelete={handleDelete}
                     onClose={() => setModal(null)}
+                    onAnalyze={analyzeApplication}
                 />
             )}
 

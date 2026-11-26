@@ -35,6 +35,8 @@ def list_applications(db: Session, user_id: int, status: S | None, limit: int, o
 
 def update_application(db: Session, user_id: int, application_id: int, changes: dict):
     application = get_application(db, user_id, application_id)
+    if "job_description" in changes and changes["job_description"] != application.job_description:
+        changes = {**changes, "match_score": None, "analysis": None, "skill_rows": []}
     if changes.get("applied_date") is not None and application.status == S.SAVED.value:
         changes = {**changes, "status": S.APPLIED.value}
     return repo.update(db, application, changes)

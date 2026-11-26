@@ -26,6 +26,14 @@ class ApplicationUpdate(BaseModel):
 class StatusUpdate(BaseModel):
     status: ApplicationStatus
 
+class AnalysisOut(BaseModel):
+    seniority: str | None = None
+    keywords: list[str] = []
+    matched_skills: list[str] = []
+    missing_skills: list[str] = []
+    semantic_score: float | None = None
+    skill_coverage: float | None = None
+
 class ApplicationOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -38,9 +46,13 @@ class ApplicationOut(BaseModel):
     notes: str | None
     applied_date: date | None
     created_at: datetime
+    skills: list[str] = []
+    analysis: AnalysisOut | None = None
 
 class ApplicationList(BaseModel):
     items: list[ApplicationOut]
     total: int
     limit: int
     offset: int
+
+

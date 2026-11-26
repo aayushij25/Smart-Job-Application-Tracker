@@ -11,7 +11,7 @@ from app.schemas.application import (
     ApplicationUpdate,
     StatusUpdate,
 )
-from app.services import application_service
+from app.services import application_service, analysis_service
 
 router = APIRouter(prefix="/applications", tags=["applications"])
 
@@ -24,6 +24,13 @@ def create_application(
 ):
     return application_service.create_application(db, current_user.id, payload.model_dump())
 
+@router.post("/{application_id}/analyze", response_model=ApplicationOut)
+def analyze_application(
+    application_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user),
+):
+    return analysis_service.analyze_application(db, current_user.id, application_id)
 
 @router.get("", response_model=ApplicationList)
 def list_applications(

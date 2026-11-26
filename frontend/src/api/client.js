@@ -2,10 +2,23 @@ const API_URL = import.meta.env.VITE_API_URL;
 const TOKEN_KEY = "jt_token";
 
 export const tokenStore = {
-    get: () => localStorage.getItem(TOKEN_KEY),
-    set: (token) => localStorage.setItem(TOKEN_KEY, token),
-    clear: () => localStorage.removeItem(TOKEN_KEY) 
+    get: () => sessionStorage.getItem(TOKEN_KEY),
+    set: (token) => sessionStorage.setItem(TOKEN_KEY, token),
+    clear: () => {
+        sessionStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(TOKEN_KEY);
+    } 
 };
+
+export function getTokenExpiry(token) {
+    try {
+        const base64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+        const {exp} = JSON.parse(atob(base64));
+        return exp ? exp * 1000 : null;
+    } catch {
+        return null;
+    }
+}
 
 export class ApiError extends Error {
     constructor(status, message) {
