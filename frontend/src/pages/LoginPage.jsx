@@ -75,7 +75,7 @@ export default function LoginPage() {
                     required
                 />
                 <button className="primary" type="submit" disabled={submitting}>
-                    {submitting ? "Please wait..." : isLogin ? "Log in" : "Register"}
+                    {submitting ? "Please wait... the free server can take up to a minute to wake up" : isLogin ? "Log in" : "Register"}
                 </button>
                 <button type="button" className="link-btn" onClick={toggleMode}>
                     {isLogin ? "No account? Register" : "Have an account? Log in"}

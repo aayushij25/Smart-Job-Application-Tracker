@@ -2,6 +2,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
+from app.core import config
 from app.core.database import get_db
 from app.core.security import decode_access_token
 from app.repositories import user_repository
@@ -22,3 +23,11 @@ def get_current_user(
         )
     return user 
 
+def require_ai_access(current_user=Depends(get_current_user)):
+    allowed = config.AI_ALLOWED_EMAILS
+    if "*" in allowed or current_user.email in allowed:
+        return current_user
+    raise HTTPException(
+        status.HTTP_403_FORBIDDEN,
+        "AI analysis is turned off on this public demo. See the README for a walkthrough.",
+    )

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Query, Response
 from sqlalchemy.orm import Session
 
-from app.api.dependencies import get_current_user
+from app.api.dependencies import get_current_user, require_ai_access
 from app.core.database import get_db
 from app.models.enums import ApplicationStatus
 from app.schemas.application import (
@@ -28,7 +28,7 @@ def create_application(
 def analyze_application(
     application_id: int,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user),
+    current_user = Depends(require_ai_access),
 ):
     return analysis_service.analyze_application(db, current_user.id, application_id)
 

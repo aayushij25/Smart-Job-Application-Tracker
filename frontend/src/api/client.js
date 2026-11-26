@@ -65,3 +65,7 @@ export async function request(path, {method = "GET", body, auth = true} = {}) {
     }
     return data;
 }
+
+export function wakeServer() {
+  fetch(`${API_URL}/health`).catch(() => {});
+}
