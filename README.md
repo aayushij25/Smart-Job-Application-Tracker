@@ -7,8 +7,8 @@ and scores how well you match.
 ## Screenshot
 
 ![Job Tracker](frontend/src/assets/Dashboard.png)
-![Job Tracker](frontend/src/assets/Add-Job-1.png)
-![Job Tracker](frontend/src/assets/Add-Job-2.png)
+![Job Tracker](frontend/src/assets/Add-job-1.png)
+![Job Tracker](frontend/src/assets/Add-job-2.png)
 
 ## Features
 - Register and log in (JWT); every query is scoped to the logged-in user
