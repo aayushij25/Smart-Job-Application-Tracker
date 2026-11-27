@@ -104,7 +104,7 @@ export default function ApplicationFormModal({ application, onSubmit, onDelete, 
                 </label>
                 <small className="hint">Setting a date moves a Saved application to Applied.</small>
                 <label>
-                    Job job_description
+                    Job Description
                     <textarea rows={6} value={form.job_description} onChange={setField("job_description")} />
                 </label>
                 <label>
