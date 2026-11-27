@@ -4,6 +4,12 @@ A full-stack job application tracker with a Kanban board and AI-assisted match s
 Paste a job description and your resume, and the app extracts the required skills with an LLM
 and scores how well you match.
 
+## Screenshot
+
+![Job Tracker](frontend/src/assets/Dashboard.png)
+![Job Tracker](frontend/src/assets/Add-Job-1.png)
+![Job Tracker](frontend/src/assets/Add-Job-2.png)
+
 ## Features
 - Register and log in (JWT); every query is scoped to the logged-in user
 - Kanban board with drag-and-drop; the backend rejects illegal status moves and the UI rolls back
@@ -50,6 +56,7 @@ column on `applications`; skills are a real table because they are queried and s
 3. Semantic score = both texts are split into overlapping chunks and embedded; for each job chunk
    the best-matching resume chunk is found with cosine similarity, then averaged and rescaled.
 4. `score = 0.6 × semantic + 0.4 × coverage`.
+
 
 ## Design decisions and trade-offs
 - **Server owns the state machine.** The UI never copies the transition rules; it applies moves
